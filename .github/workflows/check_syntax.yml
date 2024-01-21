@@ -1,0 +1,36 @@
+name: check_syntax
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  check-syntax:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+
+    steps:
+    - name: instalacja python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: update pip
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: instalacja flake8
+      run: |
+        python -m pip install flake8
+
+    - name: wyświetlenie wersji python
+      run: |
+        python --version
+
+    - name: uruchomienie flake8
+      run: |
+        flake8 .
