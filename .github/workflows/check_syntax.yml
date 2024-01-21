@@ -33,4 +33,4 @@ jobs:
 
     - name: uruchomienie flake8
       run: |
-        flake8
+        flake8 .
